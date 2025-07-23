@@ -1,8 +1,10 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 
-const Port = 3000;
+const Port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -21,11 +23,13 @@ app.post('/alcohols', (req , res) => {
     res.status(200).send(newalcohol);
 })
 // GET ALL ALCOHOL DATA
+
 app.get('/alcohols', (req , res) => {
     res.status(200).send(alcoholsdata);
 } ) 
 
 // GET ALCOHOL BY ID
+
 app.get('/alcohols/:id', (req, res) => {
     const targetID = parseInt(req.params.id);
     const data = alcoholsdata[targetID - 1];
@@ -36,6 +40,7 @@ app.get('/alcohols/:id', (req, res) => {
     }
 })
 // UPDATE THE ALCOHOLDATA
+
 app.put('/alcohols/:id', (req, res) => {
     const targetID = parseInt(req.params.id);
     const {name , price , type} = req.body;
@@ -50,12 +55,6 @@ app.put('/alcohols/:id', (req, res) => {
         }
     })
 
-
-
-
-
-
-
-app.listen(Port , () => {
+app.listen( Port , () => {
     console.log(`server is running on port ${Port}`)
 })

@@ -10,6 +10,10 @@ app.use(express.json());
 
 let alcoholsdata = []
 let id = 1;
+
+app.get('/', (req, res) => {
+    res.send("<h1>Welcome to the Alcohol API</h1><br/><p>Change the URL to /alcohols to access the alcohol data.</p>");
+})
 // POST ALCOHOL DATA
 app.post('/alcohols', (req , res) => {
     const {name , price , type}=req.body
